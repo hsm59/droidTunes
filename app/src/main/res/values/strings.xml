@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">droidTunes</string>
+    <string name="search_artists">Search Artists</string>
+</resources>

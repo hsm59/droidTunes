@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">droidTunes</string>
     <string name="search_artists">Search Artists</string>
+    <string name="itunes_url">https://itunes.apple.com/search?term=</string>
 </resources>

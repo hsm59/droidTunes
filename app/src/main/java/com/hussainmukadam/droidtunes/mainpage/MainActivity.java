@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     private static final String TAG = "MainActivity";
     ArrayList<Song> mSongsList;
     SongAdapter songAdapter;
+    String mSongName;
     EditText et_search;
     RecyclerView rv_songs;
 
@@ -40,11 +41,8 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         setContentView(R.layout.activity_main);
         et_search = (EditText) findViewById(R.id.et_search);
         rv_songs = (RecyclerView) findViewById(R.id.rv_songs);
-        rv_songs.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rv_songs.setLayoutManager(linearLayoutManager);
 
+        setupRecycler();
         et_search.setOnEditorActionListener(this);
     }
 
@@ -52,9 +50,13 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if(actionId == EditorInfo.IME_ACTION_SEARCH){
             if(et_search.getText().toString().length()!=0 && Util.isConnected(this)) {
-                performSearch(et_search.getText().toString().trim());
-            } else {
                 Toast.makeText(this, "Please Enter Artist Name", Toast.LENGTH_SHORT).show();
+            } else if(Util.isConnected(this)){
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            } else {
+                mSongName = et_search.getText().toString().trim().replace(" ", "+");
+                Log.d(TAG, "onEditorAction: mSongName "+mSongName);
+                performSearch(mSongName);
             }
             return true;
         }
@@ -85,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                             song.setTrackName(songItem.getString("trackName"));
                             song.setArtistName(songItem.getString("artistName"));
                             song.setPrimaryGenreName(songItem.getString("primaryGenreName"));
+                            song.setArtworkUrl30(songItem.getString("artworkUrl30"));
                             song.setArtworkUrl100(songItem.getString("artworkUrl100"));
                             song.setTrackPrice(songItem.getString("trackPrice"));
                             song.setTrackTimeMillis(songItem.getString("trackTimeMillis"));
@@ -105,6 +108,13 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 }
             }
         });
+    }
+
+    private void setupRecycler(){
+        rv_songs.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        rv_songs.setLayoutManager(linearLayoutManager);
     }
 
 }

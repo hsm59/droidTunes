@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -33,6 +34,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     ImageView iv_detail_artwork, iv_track_url, iv_collection_url;
     TextView tv_detail_track_name, tv_detail_artist_name, tv_detail_track_name1, tv_detail_collection_name, tv_release_date;
     RelativeLayout rl_track_view_url, rl_collection_view_url;
+    FloatingActionButton fab_play;
     Song song;
 
     @Override
@@ -55,6 +57,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         tv_release_date = (TextView) findViewById(R.id.tv_release_date);
         rl_collection_view_url = (RelativeLayout) findViewById(R.id.rl_collection_view_url);
         rl_track_view_url = (RelativeLayout) findViewById(R.id.rl_track_view_url);
+        fab_play = (FloatingActionButton) findViewById(R.id.fab_play);
 
         Picasso.with(this).load(song.getArtworkUrl100()).into(iv_detail_artwork);
         Target target = new Target() {
@@ -86,6 +89,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         rl_collection_view_url.setOnClickListener(this);
         rl_track_view_url.setOnClickListener(this);
+        fab_play.setOnClickListener(this);
     }
 
     @Override
@@ -101,6 +105,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 i1.setData(Uri.parse(song.getCollectionViewUrl()));
                 startActivity(i1);
                 break;
+            case R.id.fab_play:
+                Intent i2 = new Intent(Intent.ACTION_VIEW);
+                i2.setData(Uri.parse(song.getPreviewUrl()));
+                startActivity(i2);
         }
     }
 }

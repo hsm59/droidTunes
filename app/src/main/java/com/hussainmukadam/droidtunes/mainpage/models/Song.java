@@ -19,6 +19,7 @@ public class Song implements Parcelable{
     private String trackViewUrl;
     private String collectionPrice;
     private String releaseDate;
+    private String previewUrl;
     private String primaryGenreName;
 
     public Song(){}
@@ -36,6 +37,7 @@ public class Song implements Parcelable{
         trackViewUrl = in.readString();
         collectionPrice = in.readString();
         releaseDate = in.readString();
+        previewUrl = in.readString();
     }
 
     public String getArtistName() {
@@ -134,6 +136,14 @@ public class Song implements Parcelable{
         this.releaseDate = releaseDate;
     }
 
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
+
+    public void setPreviewUrl(String previewUrl) {
+        this.previewUrl = previewUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -153,6 +163,7 @@ public class Song implements Parcelable{
         dest.writeString(trackViewUrl);
         dest.writeString(collectionPrice);
         dest.writeString(releaseDate);
+        dest.writeString(previewUrl);
     }
 
     public static final Parcelable.Creator<Song> CREATOR = new Creator<Song>() {

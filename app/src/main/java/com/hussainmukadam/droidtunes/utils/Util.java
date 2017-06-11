@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -247,6 +249,19 @@ public final class Util {
         bitmap.setPixels(pix, 0, w, 0, 0, w, h);
 
         return (bitmap);
+    }
+
+    public static String dateFormat(String dateString){
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        try {
+            Date date = fmt.parse(dateString);
+            SimpleDateFormat fmtOut = new SimpleDateFormat("dd-MM-yyyy");
+            return fmtOut.format(date);
+        } catch(ParseException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

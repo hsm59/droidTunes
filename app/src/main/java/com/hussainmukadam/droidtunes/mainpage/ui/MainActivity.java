@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                             song.setCollectionViewUrl(songItem.getString("collectionViewUrl"));
                             song.setTrackViewUrl(songItem.getString("trackViewUrl"));
                             song.setTrackTimeMillis(songItem.getString("trackTimeMillis"));
+                            song.setReleaseDate(songItem.getString("releaseDate"));
 
                             mSongsList.add(song);
                         }

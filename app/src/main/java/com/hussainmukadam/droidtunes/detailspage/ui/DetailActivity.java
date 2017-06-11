@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "DetailActivity";
     ImageView iv_detail_artwork, iv_track_url, iv_collection_url;
-    TextView tv_detail_track_name, tv_detail_artist_name, tv_detail_track_name1, tv_detail_collection_name;
+    TextView tv_detail_track_name, tv_detail_artist_name, tv_detail_track_name1, tv_detail_collection_name, tv_release_date;
     RelativeLayout rl_track_view_url, rl_collection_view_url;
     Song song;
 
@@ -52,6 +52,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         tv_detail_track_name = (TextView) findViewById(R.id.tv_detail_track_name);
         tv_detail_track_name1 = (TextView) findViewById(R.id.tv_detail_track_name1);
         tv_detail_collection_name = (TextView) findViewById(R.id.tv_detail_collection_name);
+        tv_release_date = (TextView) findViewById(R.id.tv_release_date);
         rl_collection_view_url = (RelativeLayout) findViewById(R.id.rl_collection_view_url);
         rl_track_view_url = (RelativeLayout) findViewById(R.id.rl_track_view_url);
 
@@ -79,6 +80,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         tv_detail_artist_name.setText(song.getArtistName());
         tv_detail_track_name.setText(song.getTrackName());
+        tv_release_date.setText("Released- "+Util.dateFormat(song.getReleaseDate()));
         tv_detail_collection_name.setText(song.getCollectionName()+" - $"+song.getCollectionPrice());
         tv_detail_track_name1.setText(song.getTrackName()+" - $"+song.getTrackPrice());
 

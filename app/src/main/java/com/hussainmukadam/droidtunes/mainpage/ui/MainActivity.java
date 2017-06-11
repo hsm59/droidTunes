@@ -92,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                             if(songItem.has("trackPrice")) {
                                 song.setTrackPrice(songItem.getString("trackPrice"));
                             }
+                            if(songItem.has("collectionPrice")){
+                                song.setCollectionPrice(songItem.getString("collectionPrice"));
+                            }
+                            song.setCollectionName(songItem.getString("collectionName"));
+                            song.setCollectionViewUrl(songItem.getString("collectionViewUrl"));
+                            song.setTrackViewUrl(songItem.getString("trackViewUrl"));
                             song.setTrackTimeMillis(songItem.getString("trackTimeMillis"));
 
                             mSongsList.add(song);

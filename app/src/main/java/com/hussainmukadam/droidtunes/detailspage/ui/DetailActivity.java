@@ -1,14 +1,19 @@
 package com.hussainmukadam.droidtunes.detailspage.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
@@ -23,10 +28,11 @@ import java.util.ArrayList;
  * Created by hussain on 6/11/17.
  */
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "DetailActivity";
     ImageView iv_detail_artwork, iv_track_url, iv_collection_url;
-    TextView tv_detail_track_name, tv_detail_artist_name;
+    TextView tv_detail_track_name, tv_detail_artist_name, tv_detail_track_name1, tv_detail_collection_name;
+    RelativeLayout rl_track_view_url, rl_collection_view_url;
     Song song;
 
     @Override
@@ -44,6 +50,10 @@ public class DetailActivity extends AppCompatActivity {
         iv_collection_url = (ImageView) findViewById(R.id.iv_collection_url);
         tv_detail_artist_name = (TextView) findViewById(R.id.tv_detail_artist_name);
         tv_detail_track_name = (TextView) findViewById(R.id.tv_detail_track_name);
+        tv_detail_track_name1 = (TextView) findViewById(R.id.tv_detail_track_name1);
+        tv_detail_collection_name = (TextView) findViewById(R.id.tv_detail_collection_name);
+        rl_collection_view_url = (RelativeLayout) findViewById(R.id.rl_collection_view_url);
+        rl_track_view_url = (RelativeLayout) findViewById(R.id.rl_track_view_url);
 
         Picasso.with(this).load(song.getArtworkUrl100()).into(iv_detail_artwork);
         Target target = new Target() {
@@ -69,5 +79,26 @@ public class DetailActivity extends AppCompatActivity {
 
         tv_detail_artist_name.setText(song.getArtistName());
         tv_detail_track_name.setText(song.getTrackName());
+        tv_detail_collection_name.setText(song.getCollectionName()+" - $"+song.getCollectionPrice());
+        tv_detail_track_name1.setText(song.getTrackName()+" - $"+song.getTrackPrice());
+
+        rl_collection_view_url.setOnClickListener(this);
+        rl_track_view_url.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.rl_track_view_url:
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(song.getTrackViewUrl()));
+                startActivity(i);
+                break;
+            case R.id.rl_collection_view_url:
+                Intent i1 = new Intent(Intent.ACTION_VIEW);
+                i1.setData(Uri.parse(song.getCollectionViewUrl()));
+                startActivity(i1);
+                break;
+        }
     }
 }

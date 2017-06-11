@@ -8,13 +8,18 @@ import android.os.Parcelable;
  */
 
 public class Song implements Parcelable{
-    String artistName;
-    String trackName;
-    String artworkUrl30;
-    String artworkUrl100;
-    String trackPrice;
-    String trackTimeMillis;
-    String primaryGenreName;
+    private String artistName;
+    private String trackName;
+    private String artworkUrl30;
+    private String artworkUrl100;
+    private String trackPrice;
+    private String trackTimeMillis;
+    private String collectionName;
+    private String collectionViewUrl;
+    private String trackViewUrl;
+    private String collectionPrice;
+    private String releaseDate;
+    private String primaryGenreName;
 
     public Song(){}
 
@@ -26,6 +31,11 @@ public class Song implements Parcelable{
         trackPrice = in.readString();
         trackTimeMillis = in.readString();
         primaryGenreName = in.readString();
+        collectionName = in.readString();
+        collectionViewUrl = in.readString();
+        trackViewUrl = in.readString();
+        collectionPrice = in.readString();
+        releaseDate = in.readString();
     }
 
     public String getArtistName() {
@@ -84,6 +94,46 @@ public class Song implements Parcelable{
         this.primaryGenreName = primaryGenreName;
     }
 
+    public String getCollectionName() {
+        return collectionName;
+    }
+
+    public void setCollectionName(String collectionName) {
+        this.collectionName = collectionName;
+    }
+
+    public String getCollectionViewUrl() {
+        return collectionViewUrl;
+    }
+
+    public void setCollectionViewUrl(String collectionViewUrl) {
+        this.collectionViewUrl = collectionViewUrl;
+    }
+
+    public String getTrackViewUrl() {
+        return trackViewUrl;
+    }
+
+    public void setTrackViewUrl(String trackViewUrl) {
+        this.trackViewUrl = trackViewUrl;
+    }
+
+    public String getCollectionPrice() {
+        return collectionPrice;
+    }
+
+    public void setCollectionPrice(String collectionPrice) {
+        this.collectionPrice = collectionPrice;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -98,6 +148,11 @@ public class Song implements Parcelable{
         dest.writeString(trackPrice);
         dest.writeString(primaryGenreName);
         dest.writeString(trackTimeMillis);
+        dest.writeString(collectionName);
+        dest.writeString(collectionViewUrl);
+        dest.writeString(trackViewUrl);
+        dest.writeString(collectionPrice);
+        dest.writeString(releaseDate);
     }
 
     public static final Parcelable.Creator<Song> CREATOR = new Creator<Song>() {

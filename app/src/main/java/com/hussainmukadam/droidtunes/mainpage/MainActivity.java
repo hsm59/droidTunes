@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if(actionId == EditorInfo.IME_ACTION_SEARCH){
-            if(et_search.getText().toString().length()!=0 && Util.isConnected(this)) {
+            if(et_search.getText().toString().length()==0) {
                 Toast.makeText(this, "Please Enter Artist Name", Toast.LENGTH_SHORT).show();
-            } else if(Util.isConnected(this)){
+            } else if(!Util.isConnected(this)){
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             } else {
                 mSongName = et_search.getText().toString().trim().replace(" ", "+");
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     }
 
     private void performSearch(String artistName){
+        Util.hideSoftInput(MainActivity.this);
         Ion.with(getApplicationContext()).load("https://itunes.apple.com/search?term="+artistName).asJsonObject().withResponse()
         .setCallback(new FutureCallback<Response<JsonObject>>() {
             @Override

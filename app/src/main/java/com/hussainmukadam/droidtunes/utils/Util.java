@@ -32,7 +32,7 @@ public final class Util {
     }
 
     public static String millis2String(long millis) {
-        return String.format("%d:%d Secs",
+        return String.format("%d:%d",
                 TimeUnit.MILLISECONDS.toMinutes(millis),
                 TimeUnit.MILLISECONDS.toSeconds(millis) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))

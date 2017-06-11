@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
@@ -42,15 +43,22 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.tv_genre_name.setText(song.getPrimaryGenreName());
         holder.tv_track_time.setText(Util.millis2String(Long.parseLong(song.getTrackTimeMillis())));
         Picasso.with(holder.iv_artwork100.getContext()).load(song.getArtworkUrl100()).into(holder.iv_artwork100);
+        holder.rl_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 50;
+        return songsList.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        private RelativeLayout rl_layout;
         private TextView tv_track_name;
         private ImageView iv_artwork100;
         private TextView tv_artist_name;
@@ -64,6 +72,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             tv_genre_name = (TextView) itemView.findViewById(R.id.tv_genre_name);
             tv_track_time = (TextView) itemView.findViewById(R.id.tv_track_time);
             iv_artwork100 = (ImageView) itemView.findViewById(R.id.iv_artwork100);
+            rl_layout = (RelativeLayout) itemView.findViewById(R.id.rl_layout);
         }
     }
 }

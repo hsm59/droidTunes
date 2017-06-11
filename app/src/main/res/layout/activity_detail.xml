@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="48dp"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:id="@+id/iv_detail_artwork"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_image_black_24dp" />
+
+            <TextView
+                android:id="@+id/tv_detail_track_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_detail_artwork"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@+id/iv_detail_artwork"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tv_detail_track_name"
+                android:layout_below="@+id/tv_detail_track_name"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_play_arrow_white_24dp"
+        app:backgroundTint="@color/colorAccent"
+        app:borderWidth="0dp"
+        app:elevation="8dp"
+        app:layout_anchor="@+id/ll_container"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -90,7 +90,9 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                             song.setPrimaryGenreName(songItem.getString("primaryGenreName"));
                             song.setArtworkUrl30(songItem.getString("artworkUrl30"));
                             song.setArtworkUrl100(songItem.getString("artworkUrl100"));
-                            song.setTrackPrice(songItem.getString("trackPrice"));
+                            if(songItem.has("trackPrice")) {
+                                song.setTrackPrice(songItem.getString("trackPrice"));
+                            }
                             song.setTrackTimeMillis(songItem.getString("trackTimeMillis"));
 
                             mSongsList.add(song);

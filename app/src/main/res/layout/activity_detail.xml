@@ -22,8 +22,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="48dp"
-            android:paddingTop="8dp">
+            android:layout_marginBottom="48dp">
 
             <ImageView
                 android:id="@+id/iv_detail_artwork"
@@ -40,12 +39,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/iv_detail_artwork"
                 android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
                 android:layout_toEndOf="@+id/iv_detail_artwork"
                 android:text=""
                 android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
             <TextView
+                android:id="@+id/tv_detail_artist_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/tv_detail_track_name"
@@ -59,6 +60,7 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_play"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="16dp"
@@ -68,5 +70,8 @@
         app:elevation="8dp"
         app:layout_anchor="@+id/ll_container"
         app:layout_anchorGravity="bottom|right|end" />
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>

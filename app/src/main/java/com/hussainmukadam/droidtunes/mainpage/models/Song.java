@@ -1,10 +1,13 @@
 package com.hussainmukadam.droidtunes.mainpage.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by hussain on 6/10/17.
  */
 
-public class Song {
+public class Song implements Parcelable{
     String artistName;
     String trackName;
     String artworkUrl30;
@@ -12,6 +15,18 @@ public class Song {
     String trackPrice;
     String trackTimeMillis;
     String primaryGenreName;
+
+    public Song(){}
+
+    private Song(Parcel in){
+        artistName = in.readString();
+        trackName = in.readString();
+        artworkUrl30 = in.readString();
+        artworkUrl100 = in.readString();
+        trackPrice = in.readString();
+        trackTimeMillis = in.readString();
+        primaryGenreName = in.readString();
+    }
 
     public String getArtistName() {
         return artistName;
@@ -68,4 +83,32 @@ public class Song {
     public void setPrimaryGenreName(String primaryGenreName) {
         this.primaryGenreName = primaryGenreName;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(artistName);
+        dest.writeString(trackName);
+        dest.writeString(artworkUrl30);
+        dest.writeString(artworkUrl100);
+        dest.writeString(trackPrice);
+        dest.writeString(primaryGenreName);
+        dest.writeString(trackTimeMillis);
+    }
+
+    public static final Parcelable.Creator<Song> CREATOR = new Creator<Song>() {
+        @Override
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
+
+        @Override
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
 }

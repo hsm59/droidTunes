@@ -15,18 +15,21 @@
 
         <ImageView
             android:id="@+id/iv_artwork100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
             android:layout_centerVertical="true"
-            android:layout_margin="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
             android:background="@drawable/ic_image_black_24dp" />
 
         <TextView
             android:id="@+id/tv_track_name"
-            android:layout_width="wrap_content"
+            android:layout_alignTop="@+id/iv_artwork100"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/iv_artwork100"
-            android:padding="4dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginBottom="2dp"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -36,9 +39,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_track_name"
-            android:layout_toEndOf="@+id/iv_artwork100"
-            android:padding="4dp"
+            android:layout_alignStart="@+id/tv_track_name"
             android:textColor="@color/colorWhite"
+            android:layout_marginBottom="4dp"
             android:textSize="14sp" />
 
         <TextView
@@ -57,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/iv_artwork100"
+            android:layout_alignStart="@+id/tv_track_name"
             android:layout_below="@+id/tv_artist_name"
             android:padding="4dp"
             android:textColor="@color/colorAccent"

@@ -1,5 +1,6 @@
 package com.hussainmukadam.droidtunes.mainpage.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
+import com.hussainmukadam.droidtunes.detailspage.ui.DetailActivity;
 import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Created by hussain on 6/10/17.
@@ -36,7 +35,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         Song song = songsList.get(position);
         holder.tv_track_name.setText(song.getTrackName());
         holder.tv_artist_name.setText(song.getArtistName());
@@ -46,7 +45,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.rl_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(holder.rl_layout.getContext(), DetailActivity.class);
+                intent.putExtra("trackDetails", songsList.get(position));
+                holder.rl_layout.getContext().startActivity(intent);
             }
         });
     }
@@ -59,11 +60,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         private RelativeLayout rl_layout;
-        private TextView tv_track_name;
+        private TextView tv_track_name, tv_artist_name, tv_genre_name, tv_track_time;
         private ImageView iv_artwork100;
-        private TextView tv_artist_name;
-        private TextView tv_genre_name;
-        private TextView tv_track_time;
 
         public ViewHolder(View itemView) {
             super(itemView);

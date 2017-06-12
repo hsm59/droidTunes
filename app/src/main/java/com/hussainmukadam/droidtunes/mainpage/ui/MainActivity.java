@@ -1,5 +1,6 @@
 package com.hussainmukadam.droidtunes.mainpage.ui;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener{
     private static final String TAG = "MainActivity";
     ArrayList<Song> mSongsList;
+    ProgressDialog mProgressDialog;
     SongAdapter songAdapter;
     String mSongName;
     EditText et_search;
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         et_search = (EditText) findViewById(R.id.et_search);
         rv_songs = (RecyclerView) findViewById(R.id.rv_songs);
 
+        setupProgressDialog();
         setupRecycler();
         et_search.setOnEditorActionListener(this);
     }
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
             } else {
                 mSongName = et_search.getText().toString().trim().replace(" ", "+");
                 Log.d(TAG, "onEditorAction: mSongName "+mSongName);
+                mProgressDialog.show();
                 performSearch(mSongName);
             }
             return true;
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
 
     private void performSearch(String artistName){
         Util.hideSoftInput(MainActivity.this);
-        Ion.with(getApplicationContext()).load("https://itunes.apple.com/search?term="+artistName).asJsonObject().withResponse()
+        Ion.with(getApplicationContext()).load(getString(R.string.itunes_url)+artistName).asJsonObject().withResponse()
         .setCallback(new FutureCallback<Response<JsonObject>>() {
             @Override
             public void onCompleted(Exception e, Response<JsonObject> result) {
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                     } catch(JSONException jsonException){
                         jsonException.printStackTrace();
                     }
-
+                    mProgressDialog.dismiss();
                     songAdapter = new SongAdapter(mSongsList);
                     rv_songs.setAdapter(songAdapter);
                     songAdapter.notifyDataSetChanged();
@@ -124,6 +128,12 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_songs.setLayoutManager(linearLayoutManager);
+    }
+
+    private void setupProgressDialog(){
+        mProgressDialog = new ProgressDialog(MainActivity.this, R.style.ProgressBarTheme);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
     }
 
 }

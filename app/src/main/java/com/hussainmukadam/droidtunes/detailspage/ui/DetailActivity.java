@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -81,9 +82,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         iv_collection_url.setTag(target);
         Picasso.with(this).load(song.getArtworkUrl100()).into(target);
 
+
         tv_detail_artist_name.setText(song.getArtistName());
         tv_detail_track_name.setText(song.getTrackName());
-        tv_release_date.setText("Released- "+Util.dateFormat(song.getReleaseDate()));
+        tv_release_date.setText("Released - "+Util.dateFormat(song.getReleaseDate()));
         tv_detail_collection_name.setText(song.getCollectionName()+" - $"+song.getCollectionPrice());
         tv_detail_track_name1.setText(song.getTrackName()+" - $"+song.getTrackPrice());
 

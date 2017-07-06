@@ -3,26 +3,58 @@ package com.hussainmukadam.droidtunes.mainpage.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by hussain on 6/10/17.
  */
 
 public class Song implements Parcelable{
+    @SerializedName("artistName")
     private String artistName;
+    @SerializedName("trackName")
     private String trackName;
+    @SerializedName("artworkUrl30")
     private String artworkUrl30;
+    @SerializedName("artworkUrl100")
     private String artworkUrl100;
+    @SerializedName("trackPrice")
     private String trackPrice;
+    @SerializedName("trackTimeMillis")
     private String trackTimeMillis;
+    @SerializedName("collectionName")
     private String collectionName;
+    @SerializedName("collectionViewUrl")
     private String collectionViewUrl;
+    @SerializedName("trackViewUrl")
     private String trackViewUrl;
+    @SerializedName("collectionPrice")
     private String collectionPrice;
+    @SerializedName("releaseDate")
     private String releaseDate;
+    @SerializedName("previewUrl")
     private String previewUrl;
+    @SerializedName("primaryGenreName")
     private String primaryGenreName;
 
-    public Song(){}
+    public Song(String artistName, String trackName, String artworkUrl30, String artworkUrl100,
+                String trackPrice, String trackTimeMillis, String collectionName, String collectionViewUrl,
+                String trackViewUrl, String collectionPrice, String releaseDate, String previewUrl,
+                String primaryGenreName){
+        this.artistName = artistName;
+        this.trackName = trackName;
+        this.artworkUrl30 = artworkUrl30;
+        this.artworkUrl100 = artworkUrl100;
+        this.trackPrice = trackPrice;
+        this.trackTimeMillis = trackTimeMillis;
+        this.collectionName = collectionName;
+        this.collectionViewUrl = collectionViewUrl;
+        this.trackViewUrl = trackViewUrl;
+        this.collectionPrice = collectionPrice;
+        this.releaseDate = releaseDate;
+        this.previewUrl = previewUrl;
+        this.primaryGenreName = primaryGenreName;
+    }
 
     private Song(Parcel in){
         artistName = in.readString();

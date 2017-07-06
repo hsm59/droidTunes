@@ -77,13 +77,15 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     private void performSearchWithRetrofit(String artistName){
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<SongResponse> call = apiService.getSongDetails("search?term="+artistName);
+        Call<SongResponse> call = apiService.getSongDetails(artistName);
 
         call.enqueue(new Callback<SongResponse>() {
             @Override
             public void onResponse(Call<SongResponse> call, retrofit2.Response<SongResponse> response) {
-                List<Song> mSongsListRetrofit = response.body().getResults();
-                Log.d(TAG, "onResponse: Songs List "+mSongsListRetrofit.size());
+                Log.d(TAG, "onResponse: Response Code "+response.code());
+
+//                List<Song> mSongsListRetrofit = response.body().getResults();
+//                Log.d(TAG, "onResponse: Songs List "+mSongsListRetrofit.size());
             }
 
             @Override

@@ -16,15 +16,16 @@ import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by hussain on 6/10/17.
  */
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
-    private ArrayList<Song> songsList;
+    private List<Song> songsList;
 
-    public SongAdapter(ArrayList<Song> songsList){
+    public SongAdapter(List<Song> songsList){
         this.songsList = songsList;
     }
 

@@ -34,7 +34,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener{
+public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
     private static final String TAG = "MainActivity";
     ArrayList<Song> mSongsList;
     ProgressDialog mProgressDialog;
@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if(actionId == EditorInfo.IME_ACTION_SEARCH){
-            if(et_search.getText().toString().length()==0) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (et_search.getText().toString().length() == 0) {
                 Toast.makeText(this, "Please Enter Artist Name", Toast.LENGTH_SHORT).show();
-            } else if(!Util.isConnected(this)){
+            } else if (!Util.isConnected(this)) {
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             } else {
                 mSongName = et_search.getText().toString().trim().replace(" ", "+");
-                Log.d(TAG, "onEditorAction: mSongName "+mSongName);
+                Log.d(TAG, "onEditorAction: mSongName " + mSongName);
                 mProgressDialog.show();
 //                performSearch(mSongName);
                 performSearchWithRetrofit(mSongName);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         return false;
     }
 
-    private void performSearchWithRetrofit(String artistName){
+    private void performSearchWithRetrofit(String artistName) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<SongResponse> call = apiService.getSongDetails(artistName);
@@ -82,15 +82,32 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         call.enqueue(new Callback<SongResponse>() {
             @Override
             public void onResponse(Call<SongResponse> call, retrofit2.Response<SongResponse> response) {
-                Log.d(TAG, "onResponse: Response Code "+response.code());
-
-//                List<Song> mSongsListRetrofit = response.body().getResults();
-//                Log.d(TAG, "onResponse: Songs List "+mSongsListRetrofit.size());
+                Log.d(TAG, "onResponse: Response Code " + response.code());
+                if (response.code()==200) {
+                    if (response.body().getResults().size() != 0) {
+                        Util.hideSoftInput(MainActivity.this);
+                        List<Song> mSongsListRetrofit = response.body().getResults();
+                        mProgressDialog.dismiss();
+                        songAdapter = new SongAdapter(mSongsListRetrofit);
+                        rv_songs.setAdapter(songAdapter);
+                        songAdapter.notifyDataSetChanged();
+                        Log.d(TAG, "onResponse: Songs List " + mSongsListRetrofit.size());
+                    } else {
+                        mProgressDialog.dismiss();
+                        Toast.makeText(MainActivity.this, "Could not find any songs..", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Util.hideSoftInput(MainActivity.this);
+                    mProgressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, "Some error occurred, please try again", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<SongResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: Failure Occurred "+t.getMessage());
+                mProgressDialog.dismiss();
+                Toast.makeText(MainActivity.this, "Some error occurred, please try again", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onFailure: Failure Occurred " + t.getMessage());
             }
         });
     }
@@ -154,13 +171,13 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
 //        });
 //    }
 
-    private void setupRecycler(){
+    private void setupRecycler() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_songs.setLayoutManager(linearLayoutManager);
     }
 
-    private void setupProgressDialog(){
+    private void setupProgressDialog() {
         mProgressDialog = new ProgressDialog(MainActivity.this, R.style.ProgressBarTheme);
         mProgressDialog.setCancelable(false);
         mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);

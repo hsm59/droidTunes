@@ -86,7 +86,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         tv_detail_artist_name.setText(song.getArtistName());
         tv_detail_track_name.setText(song.getTrackName());
-        tv_release_date.setText("Released on: "+Util.dateFormat(song.getReleaseDate()));
+        tv_release_date.setText(Util.dateFormat(song.getReleaseDate()));
         tv_detail_collection_name.setText(song.getCollectionName()+" - $"+song.getCollectionPrice());
         tv_detail_track_name1.setText(song.getTrackName()+" - $"+song.getTrackPrice());
 

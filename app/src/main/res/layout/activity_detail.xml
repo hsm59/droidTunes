@@ -247,7 +247,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_play_arrow_white_24dp"
+        android:src="@drawable/favorite_button"
         app:backgroundTint="@color/colorAccent"
         app:borderWidth="0dp"
         app:elevation="8dp"

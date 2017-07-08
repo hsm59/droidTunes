@@ -109,9 +109,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(i1);
                 break;
             case R.id.fab_play:
-                Intent i2 = new Intent(Intent.ACTION_VIEW);
-                i2.setData(Uri.parse(song.getPreviewUrl()));
-                startActivity(i2);
+                fab_play.setSelected(true);
+//                Intent i2 = new Intent(Intent.ACTION_VIEW);
+//                i2.setData(Uri.parse(song.getPreviewUrl()));
+//                startActivity(i2);
         }
     }
 }

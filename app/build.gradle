@@ -12,9 +12,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'Base_url', '"https://itunes.apple.com/"'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'Base_url', '"https://itunes.apple.com/"'
         }
     }
 }
@@ -24,6 +30,7 @@ ext{
     picassoLibVersion = "2.5.2"
     retrofitLibVersion = "2.3.0"
     loggingLibVersion = "3.6.0"
+    butterknifeLibVer = "8.7.0"
 }
 
 dependencies {
@@ -43,9 +50,13 @@ dependencies {
     //Palette for Extracting Colors
     compile "com.android.support:palette-v7:${supportLibVersion}"
 
-    //Retrofit and OkHttp
+    //Retrofit and OkHttp for Networking
     compile 'com.squareup.retrofit2:retrofit:'+retrofitLibVersion
     compile 'com.squareup.retrofit2:converter-gson:'+retrofitLibVersion
-    //HttpLoggingInterceptor
+    //Logging Network Calls
     compile 'com.squareup.okhttp3:logging-interceptor:'+loggingLibVersion
+
+    //Butterknife for Binding Views
+    compile 'com.jakewharton:butterknife:'+butterknifeLibVer
+    annotationProcessor 'com.jakewharton:butterknife-compiler:'+butterknifeLibVer
 }

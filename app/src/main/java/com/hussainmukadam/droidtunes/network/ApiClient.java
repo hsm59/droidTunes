@@ -1,5 +1,7 @@
 package com.hussainmukadam.droidtunes.network;
 
+import com.hussainmukadam.droidtunes.BuildConfig;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -10,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class ApiClient {
-    private static final String BASE_URL = "https://itunes.apple.com/";
+//    private static final String BASE_URL = "https://itunes.apple.com/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(){
@@ -22,7 +24,7 @@ public class ApiClient {
 
         if(retrofit==null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(BuildConfig.Base_url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();

@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 mSongName = et_search.getText().toString().trim().replace(" ", "+");
                 Log.d(TAG, "onEditorAction: mSongName " + mSongName);
                 mProgressDialog.show();
-                performSearchWithRetrofit(mSongName);
+                performSearch(mSongName);
             }
             return true;
         }
         return false;
     }
 
-    private void performSearchWithRetrofit(String artistName) {
+    private void performSearch(String artistName) {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<SongResponse> call = apiService.getSongDetails(artistName);
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         rv_songs.setLayoutManager(linearLayoutManager);
     }
 
+    //TODO: Move this method to Util, if there are any more network calls
     private void setupProgressDialog() {
         mProgressDialog = new ProgressDialog(MainActivity.this, R.style.ProgressBarTheme);
         mProgressDialog.setCancelable(false);

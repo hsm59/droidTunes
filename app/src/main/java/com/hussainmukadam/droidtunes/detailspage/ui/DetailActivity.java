@@ -27,16 +27,26 @@ import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by hussain on 6/11/17.
  */
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "DetailActivity";
-    ImageView iv_detail_artwork, iv_track_url, iv_collection_url;
-    TextView tv_detail_track_name, tv_detail_artist_name, tv_detail_track_name1, tv_detail_collection_name, tv_release_date;
-    LinearLayout ll_track_view_url, ll_collection_view_url;
-    FloatingActionButton fab_play;
+    @BindView(R.id.iv_detail_artwork) ImageView iv_detail_artwork;
+    @BindView(R.id.iv_track_url) ImageView iv_track_url;
+    @BindView(R.id.iv_collection_url) ImageView iv_collection_url;
+    @BindView(R.id.tv_detail_track_name) TextView tv_detail_track_name;
+    @BindView(R.id.tv_detail_artist_name) TextView tv_detail_artist_name;
+    @BindView(R.id.tv_detail_track_name1) TextView tv_detail_track_name1;
+    @BindView(R.id.tv_detail_collection_name) TextView tv_detail_collection_name;
+    @BindView(R.id.tv_release_date) TextView tv_release_date;
+    @BindView(R.id.ll_track_view_url) LinearLayout ll_track_view_url;
+    @BindView(R.id.ll_collection_view_url) LinearLayout ll_collection_view_url;
+    @BindView(R.id.fab_play) FloatingActionButton fab_play;
     Song song;
 
     @Override
@@ -44,23 +54,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         getSupportActionBar().setTitle("Track Details");
         setContentView(R.layout.activity_detail);
+        ButterKnife.bind(this);
         song = getIntent().getParcelableExtra("trackDetails");
         initViews();
     }
 
     private void initViews(){
-        iv_detail_artwork = (ImageView) findViewById(R.id.iv_detail_artwork);
-        iv_track_url = (ImageView) findViewById(R.id.iv_track_url);
-        iv_collection_url = (ImageView) findViewById(R.id.iv_collection_url);
-        tv_detail_artist_name = (TextView) findViewById(R.id.tv_detail_artist_name);
-        tv_detail_track_name = (TextView) findViewById(R.id.tv_detail_track_name);
-        tv_detail_track_name1 = (TextView) findViewById(R.id.tv_detail_track_name1);
-        tv_detail_collection_name = (TextView) findViewById(R.id.tv_detail_collection_name);
-        tv_release_date = (TextView) findViewById(R.id.tv_release_date);
-        ll_collection_view_url = (LinearLayout) findViewById(R.id.ll_collection_view_url);
-        ll_track_view_url = (LinearLayout) findViewById(R.id.ll_track_view_url);
-        fab_play = (FloatingActionButton) findViewById(R.id.fab_play);
-
         Picasso.with(this).load(song.getArtworkUrl100()).into(iv_detail_artwork);
         Target target = new Target() {
             @Override

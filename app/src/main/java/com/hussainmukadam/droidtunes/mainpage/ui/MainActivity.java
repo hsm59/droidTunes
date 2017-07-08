@@ -23,6 +23,8 @@ import com.hussainmukadam.droidtunes.utils.Util;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -31,15 +33,14 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     ProgressDialog mProgressDialog;
     SongAdapter songAdapter;
     String mSongName;
-    EditText et_search;
-    RecyclerView rv_songs;
+    @BindView(R.id.et_search) EditText et_search;
+    @BindView(R.id.rv_songs) RecyclerView rv_songs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        et_search = (EditText) findViewById(R.id.et_search);
-        rv_songs = (RecyclerView) findViewById(R.id.rv_songs);
+        ButterKnife.bind(this);
 
         setupProgressDialog();
         setupRecycler();

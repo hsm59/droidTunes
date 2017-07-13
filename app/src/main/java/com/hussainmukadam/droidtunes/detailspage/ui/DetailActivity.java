@@ -8,15 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
@@ -24,8 +18,6 @@ import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +38,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.tv_release_date) TextView tv_release_date;
     @BindView(R.id.ll_track_view_url) LinearLayout ll_track_view_url;
     @BindView(R.id.ll_collection_view_url) LinearLayout ll_collection_view_url;
-    @BindView(R.id.fab_play) FloatingActionButton fab_play;
+    @BindView(R.id.fab_favorite) FloatingActionButton fab_favorite;
     Song song;
 
     @Override
@@ -91,7 +83,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         ll_collection_view_url.setOnClickListener(this);
         ll_track_view_url.setOnClickListener(this);
-        fab_play.setOnClickListener(this);
+        fab_favorite.setOnClickListener(this);
     }
 
     @Override
@@ -107,8 +99,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 i1.setData(Uri.parse(song.getCollectionViewUrl()));
                 startActivity(i1);
                 break;
-            case R.id.fab_play:
-                fab_play.setSelected(true);
+            case R.id.fab_favorite:
+                fab_favorite.setSelected(true);
 //                Intent i2 = new Intent(Intent.ACTION_VIEW);
 //                i2.setData(Uri.parse(song.getPreviewUrl()));
 //                startActivity(i2);

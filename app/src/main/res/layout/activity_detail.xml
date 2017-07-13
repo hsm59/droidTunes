@@ -243,7 +243,7 @@
 
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_play"
+        android:id="@+id/fab_favorite"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="16dp"

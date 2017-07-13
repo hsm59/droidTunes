@@ -18,6 +18,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by hussain on 6/10/17.
  */
@@ -60,18 +63,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private RelativeLayout rl_layout;
-        private TextView tv_track_name, tv_artist_name, tv_genre_name, tv_track_time;
-        private ImageView iv_artwork100;
+        @BindView(R.id.rl_layout) RelativeLayout rl_layout;
+        @BindView(R.id.tv_track_name) TextView tv_track_name;
+        @BindView(R.id.tv_artist_name) TextView tv_artist_name;
+        @BindView(R.id.tv_genre_name) TextView tv_genre_name;
+        @BindView(R.id.tv_track_time) TextView tv_track_time;
+        @BindView(R.id.iv_artwork100) ImageView iv_artwork100;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            tv_track_name = (TextView) itemView.findViewById(R.id.tv_track_name);
-            tv_artist_name = (TextView) itemView.findViewById(R.id.tv_artist_name);
-            tv_genre_name = (TextView) itemView.findViewById(R.id.tv_genre_name);
-            tv_track_time = (TextView) itemView.findViewById(R.id.tv_track_time);
-            iv_artwork100 = (ImageView) itemView.findViewById(R.id.iv_artwork100);
-            rl_layout = (RelativeLayout) itemView.findViewById(R.id.rl_layout);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

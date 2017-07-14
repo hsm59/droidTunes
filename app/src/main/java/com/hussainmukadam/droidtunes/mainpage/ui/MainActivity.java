@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
             @Override
             public void onResponse(Call<SongResponse> call, retrofit2.Response<SongResponse> response) {
                 Log.d(TAG, "onResponse: Response Code " + response.code());
-                if (response.code()==200) {
+                if (response.isSuccessful()) {
                     if (response.body().getResults().size() != 0) {
                         Util.hideSoftInput(MainActivity.this);
                         List<Song> mSongsListRetrofit = response.body().getResults();

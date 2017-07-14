@@ -21,18 +21,18 @@ public class FavoritesDbHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_FAVORITE_TABLE = "CREATE TABLE" + FavoriteEntry.TABLE_NAME + " (" +
                 FavoriteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                FavoriteEntry.ARTIST_NAME + " TEXT NOT NULL," +
-                FavoriteEntry.TRACK_NAME + " TEXT NOT NULL," +
-                FavoriteEntry.ARTWORK_URL + " TEXT NOT NULL," +
-                FavoriteEntry.TRACK_PRICE + " TEXT NOT NULL," +
-                FavoriteEntry.GENRE_NAME + " TEXT NOT NULL," +
-                FavoriteEntry.TRACK_TIME + " TEXT NOT NULL," +
-                FavoriteEntry.COLLECTION_NAME + " TEXT NOT NULL," +
-                FavoriteEntry.COLLECTION_VIEW_URL + " TEXT NOT NULL," +
-                FavoriteEntry.TRACK_VIEW_URL + " TEXT NOT NULL," +
-                FavoriteEntry.COLLECTION_PRICE + " TEXT NOT NULL," +
-                FavoriteEntry.RELEASE_DATE + " TEXT NOT NULL," +
-                FavoriteEntry.PREVIEW_URL + " TEXT NOT NULL" + ");";
+                FavoriteEntry.COLUMN_ARTIST_NAME+ " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TRACK_NAME + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_ARTWORK_URL + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TRACK_PRICE + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_GENRE_NAME + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TRACK_TIME + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_COLLECTION_NAME + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_COLLECTION_VIEW_URL + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TRACK_VIEW_URL + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_COLLECTION_PRICE + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_RELEASE_DATE + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_PREVIEW_URL + " TEXT NOT NULL" + ");";
 
         db.execSQL(SQL_CREATE_FAVORITE_TABLE);
     }

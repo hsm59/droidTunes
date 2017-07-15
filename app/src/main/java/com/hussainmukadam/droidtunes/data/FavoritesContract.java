@@ -13,11 +13,12 @@ public class FavoritesContract {
             FavoriteEntry.COLUMN_ARTWORK_URL, FavoriteEntry.COLUMN_TRACK_PRICE, FavoriteEntry.COLUMN_GENRE_NAME,
             FavoriteEntry.COLUMN_TRACK_TIME, FavoriteEntry.COLUMN_COLLECTION_NAME, FavoriteEntry.COLUMN_COLLECTION_VIEW_URL,
             FavoriteEntry.COLUMN_TRACK_VIEW_URL, FavoriteEntry.COLUMN_COLLECTION_PRICE, FavoriteEntry.COLUMN_RELEASE_DATE,
-            FavoriteEntry.COLUMN_PREVIEW_URL
+            FavoriteEntry.COLUMN_PREVIEW_URL, FavoriteEntry.COLUMN_TRACK_ID
     };
 
     public static final class FavoriteEntry implements BaseColumns {
         public static final String TABLE_NAME = "favorites";
+        public static final String COLUMN_TRACK_ID = "trackId";
         public static final String COLUMN_ARTIST_NAME = "artistName";
         public static final String COLUMN_TRACK_NAME = "trackName";
         public static final String COLUMN_ARTWORK_URL = "artworkUrl100";

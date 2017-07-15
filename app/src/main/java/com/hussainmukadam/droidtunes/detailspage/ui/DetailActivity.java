@@ -1,6 +1,10 @@
 package com.hussainmukadam.droidtunes.detailspage.ui;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -8,12 +12,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.hussainmukadam.droidtunes.BuildConfig;
 import com.hussainmukadam.droidtunes.R;
+import com.hussainmukadam.droidtunes.data.FavoritesContract;
+import com.hussainmukadam.droidtunes.data.FavoritesDbHandler;
 import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
@@ -39,7 +48,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     @BindView(R.id.ll_track_view_url) LinearLayout ll_track_view_url;
     @BindView(R.id.ll_collection_view_url) LinearLayout ll_collection_view_url;
     @BindView(R.id.fab_favorite) FloatingActionButton fab_favorite;
-    Song song;
+    private Song song;
+    private SQLiteDatabase mDb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +59,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         ButterKnife.bind(this);
         song = getIntent().getParcelableExtra("trackDetails");
         initViews();
+        FavoritesDbHandler favDbHelper = new FavoritesDbHandler(this);
+        mDb = favDbHelper.getWritableDatabase();
     }
 
     private void initViews(){
@@ -84,6 +96,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         ll_collection_view_url.setOnClickListener(this);
         ll_track_view_url.setOnClickListener(this);
         fab_favorite.setOnClickListener(this);
+
+        if(isSongFavorite()){
+            fab_favorite.setSelected(true);
+        } else{
+            fab_favorite.setSelected(false);
+        }
     }
 
     @Override
@@ -100,10 +118,59 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(i1);
                 break;
             case R.id.fab_favorite:
-                fab_favorite.setSelected(true);
+                if(!fab_favorite.isSelected()) {
+                    fab_favorite.setSelected(true);
+                    addFavoriteSong();
+                } else {
+                    fab_favorite.setSelected(false);
+                    removeFavoriteSong();
+                }
 //                Intent i2 = new Intent(Intent.ACTION_VIEW);
 //                i2.setData(Uri.parse(song.getPreviewUrl()));
 //                startActivity(i2);
+        }
+    }
+
+    public void addFavoriteSong(){
+        ContentValues cv = new ContentValues();
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_ARTIST_NAME, song.getArtistName());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_ARTWORK_URL, song.getArtworkUrl100());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_COLLECTION_NAME, song.getCollectionName());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_COLLECTION_PRICE, song.getCollectionPrice());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_COLLECTION_VIEW_URL, song.getCollectionViewUrl());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_GENRE_NAME, song.getPrimaryGenreName());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_PREVIEW_URL, song.getPreviewUrl());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_RELEASE_DATE, song.getReleaseDate());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_TRACK_NAME, song.getTrackName());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_TRACK_PRICE, song.getTrackPrice());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_TRACK_TIME, song.getTrackTimeMillis());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_TRACK_VIEW_URL, song.getTrackViewUrl());
+        cv.put(FavoritesContract.FavoriteEntry.COLUMN_TRACK_ID, song.getTrackId());
+        mDb.insert(FavoritesContract.FavoriteEntry.TABLE_NAME, null, cv);
+        Toast.makeText(this, "Added to your Favorites", Toast.LENGTH_SHORT).show();
+    }
+
+    public void removeFavoriteSong() {
+        mDb.delete(FavoritesContract.FavoriteEntry.TABLE_NAME, FavoritesContract.FavoriteEntry.COLUMN_TRACK_ID+ "="
+                + song.getTrackId(), null);
+        Toast.makeText(this, "Removed from Favorites", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean isSongFavorite(){
+        FavoritesDbHandler favDbHandlerReadable = new FavoritesDbHandler(this);
+        SQLiteDatabase mDbReadable = favDbHandlerReadable.getReadableDatabase();
+
+        String sql = "SELECT * FROM "+FavoritesContract.FavoriteEntry.TABLE_NAME+ " WHERE "
+                + FavoritesContract.FavoriteEntry.COLUMN_TRACK_ID + " = "+song.getTrackId();
+        Cursor cursor = mDbReadable.rawQuery(sql, null);
+        if(BuildConfig.DEBUG){
+            Log.d(TAG, "getSongDetails: Cursor Count "+cursor.getCount());
+        }
+
+        if(cursor.getCount()>0){
+            return true;
+        } else{
+            return false;
         }
     }
 }

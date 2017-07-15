@@ -36,11 +36,21 @@ public class Song implements Parcelable{
     private String previewUrl;
     @SerializedName("primaryGenreName")
     private String primaryGenreName;
+    @SerializedName("trackId")
+    private String trackId;
+
+    public String getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(String trackId) {
+        this.trackId = trackId;
+    }
 
     public Song(String artistName, String trackName, String artworkUrl30, String artworkUrl100,
                 String trackPrice, String trackTimeMillis, String collectionName, String collectionViewUrl,
                 String trackViewUrl, String collectionPrice, String releaseDate, String previewUrl,
-                String primaryGenreName){
+                String primaryGenreName, String trackId){
         this.artistName = artistName;
         this.trackName = trackName;
         this.artworkUrl30 = artworkUrl30;
@@ -54,6 +64,7 @@ public class Song implements Parcelable{
         this.releaseDate = releaseDate;
         this.previewUrl = previewUrl;
         this.primaryGenreName = primaryGenreName;
+        this.trackId = trackId;
     }
 
     private Song(Parcel in){
@@ -70,6 +81,7 @@ public class Song implements Parcelable{
         collectionPrice = in.readString();
         releaseDate = in.readString();
         previewUrl = in.readString();
+        trackId = in.readString();
     }
 
     public String getArtistName() {
@@ -196,6 +208,7 @@ public class Song implements Parcelable{
         dest.writeString(collectionPrice);
         dest.writeString(releaseDate);
         dest.writeString(previewUrl);
+        dest.writeString(trackId);
     }
 
     public static final Parcelable.Creator<Song> CREATOR = new Creator<Song>() {

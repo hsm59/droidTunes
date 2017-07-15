@@ -1,10 +1,9 @@
-package com.hussainmukadam.droidtunes.detailspage.ui;
+package com.hussainmukadam.droidtunes.detailpage.ui;
 
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -108,14 +107,14 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.ll_track_view_url:
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(song.getTrackViewUrl()));
-                startActivity(i);
+                Intent trackViewIntent = new Intent(Intent.ACTION_VIEW);
+                trackViewIntent.setData(Uri.parse(song.getTrackViewUrl()));
+                startActivity(trackViewIntent);
                 break;
             case R.id.ll_collection_view_url:
-                Intent i1 = new Intent(Intent.ACTION_VIEW);
-                i1.setData(Uri.parse(song.getCollectionViewUrl()));
-                startActivity(i1);
+                Intent collectionViewIntent = new Intent(Intent.ACTION_VIEW);
+                collectionViewIntent.setData(Uri.parse(song.getCollectionViewUrl()));
+                startActivity(collectionViewIntent);
                 break;
             case R.id.fab_favorite:
                 if(!fab_favorite.isSelected()) {
@@ -125,9 +124,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     fab_favorite.setSelected(false);
                     removeFavoriteSong();
                 }
-//                Intent i2 = new Intent(Intent.ACTION_VIEW);
-//                i2.setData(Uri.parse(song.getPreviewUrl()));
-//                startActivity(i2);
         }
     }
 
@@ -167,10 +163,15 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
             Log.d(TAG, "getSongDetails: Cursor Count "+cursor.getCount());
         }
 
-        if(cursor.getCount()>0){
-            return true;
-        } else{
-            return false;
+        return cursor.getCount()>0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mDb!=null) {
+            mDb.close();
+            mDb = null;
         }
     }
 }

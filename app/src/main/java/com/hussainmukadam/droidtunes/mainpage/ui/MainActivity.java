@@ -1,18 +1,23 @@
 package com.hussainmukadam.droidtunes.mainpage.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hussainmukadam.droidtunes.R;
+import com.hussainmukadam.droidtunes.favoritepage.ui.FavoriteActivity;
 import com.hussainmukadam.droidtunes.mainpage.adapters.SongAdapter;
 import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.mainpage.models.SongResponse;
@@ -117,4 +122,20 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         mProgressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_screen_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_favorite:
+                Intent favoriteIntent = new Intent(this, FavoriteActivity.class);
+                startActivity(favoriteIntent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

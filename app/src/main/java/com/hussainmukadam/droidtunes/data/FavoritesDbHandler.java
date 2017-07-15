@@ -33,7 +33,8 @@ public class FavoritesDbHandler extends SQLiteOpenHelper {
                 FavoriteEntry.COLUMN_COLLECTION_PRICE + " TEXT NOT NULL," +
                 FavoriteEntry.COLUMN_RELEASE_DATE + " TEXT NOT NULL," +
                 FavoriteEntry.COLUMN_PREVIEW_URL + " TEXT NOT NULL," +
-                FavoriteEntry.COLUMN_TRACK_ID +" TEXT NOT NULL" + ");";
+                FavoriteEntry.COLUMN_TRACK_ID +" TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" + ");";
 
         db.execSQL(SQL_CREATE_FAVORITE_TABLE);
     }

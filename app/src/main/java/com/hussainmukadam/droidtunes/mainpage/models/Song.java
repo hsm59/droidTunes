@@ -39,13 +39,7 @@ public class Song implements Parcelable{
     @SerializedName("trackId")
     private String trackId;
 
-    public String getTrackId() {
-        return trackId;
-    }
-
-    public void setTrackId(String trackId) {
-        this.trackId = trackId;
-    }
+    public Song(){}
 
     public Song(String artistName, String trackName, String artworkUrl30, String artworkUrl100,
                 String trackPrice, String trackTimeMillis, String collectionName, String collectionViewUrl,
@@ -82,6 +76,14 @@ public class Song implements Parcelable{
         releaseDate = in.readString();
         previewUrl = in.readString();
         trackId = in.readString();
+    }
+
+    public String getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(String trackId) {
+        this.trackId = trackId;
     }
 
     public String getArtistName() {

@@ -15,6 +15,7 @@
 
         <ImageView
             android:id="@+id/iv_artwork100"
+            android:scaleType="fitXY"
             android:layout_width="54dp"
             android:layout_height="54dp"
             android:layout_centerVertical="true"

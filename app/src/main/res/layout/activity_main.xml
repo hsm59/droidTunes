@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    tools:context="com.hussainmukadam.droidtunes.mainpage.ui.MainActivity">
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/et_search"
@@ -19,7 +18,7 @@
         android:inputType="text"
         android:maxLines="1"
         android:padding="16dp"
-        android:paddingEnd="16dp"
+        android:paddingEnd="10dp"
         android:paddingStart="16dp"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorAccent"

@@ -67,7 +67,19 @@ public class FavoriteActivity extends AppCompatActivity {
 
     private Song cursorToSong(Cursor cursor) {
         Song song = new Song();
+        song.setArtistName(cursor.getString(FavoritesContract.COL_ARTIST_NAME));
         song.setArtworkUrl100(cursor.getString(FavoritesContract.COL_ARTWORK_URL));
+        song.setCollectionName(cursor.getString(FavoritesContract.COL_COLLECTION_NAME));
+        song.setCollectionPrice(cursor.getString(FavoritesContract.COL_COLLECTION_PRICE));
+        song.setCollectionViewUrl(cursor.getString(FavoritesContract.COL_COLLECTION_VIEW_URL));
+        song.setPreviewUrl(cursor.getString(FavoritesContract.COL_PREVIEW_URL));
+        song.setPrimaryGenreName(cursor.getString(FavoritesContract.COL_GENRE_NAME));
+        song.setReleaseDate(cursor.getString(FavoritesContract.COL_RELEASE_DATE));
+        song.setTrackId(cursor.getString(FavoritesContract.COL_TRACK_ID));
+        song.setTrackName(cursor.getString(FavoritesContract.COL_TRACK_NAME));
+        song.setTrackPrice(cursor.getString(FavoritesContract.COL_TRACK_PRICE));
+        song.setTrackTimeMillis(cursor.getString(FavoritesContract.COL_TRACK_TIME));
+        song.setTrackViewUrl(cursor.getString(FavoritesContract.COL_TRACK_VIEW_URL));
         return song;
     }
 

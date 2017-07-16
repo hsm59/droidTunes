@@ -23,6 +23,7 @@ import com.hussainmukadam.droidtunes.R;
 import com.hussainmukadam.droidtunes.data.FavoritesContract;
 import com.hussainmukadam.droidtunes.data.FavoritesDbHandler;
 import com.hussainmukadam.droidtunes.mainpage.models.Song;
+import com.hussainmukadam.droidtunes.utils.MyBasePicassoTargetUtil;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -64,23 +65,16 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
     private void initViews(){
         Picasso.with(this).load(song.getArtworkUrl100()).into(iv_detail_artwork);
-        Target target = new Target() {
+
+        //Since we only require onBitmapLoaded(), using Abstract Class instead of Interface
+        MyBasePicassoTargetUtil target = new MyBasePicassoTargetUtil() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 iv_track_url.setImageBitmap(Util.fastblur(bitmap, 1f, 10));
                 iv_collection_url.setImageBitmap(Util.fastblur(bitmap, 1f, 10));
             }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {
-
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-            }
         };
+
         iv_track_url.setTag(target);
         iv_collection_url.setTag(target);
         Picasso.with(this).load(song.getArtworkUrl100()).into(target);

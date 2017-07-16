@@ -51,14 +51,14 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
         }
 
         Picasso.with(holder.iv_favorite_song_item.getContext()).load(song.getArtworkUrl100()).into(holder.iv_favorite_song_item);
-//        holder.ll_favorite_song_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(holder.ll_favorite_song_item.getContext(), DetailActivity.class);
-//                intent.putExtra("trackDetails", songsList.get(position));
-//                holder.ll_favorite_song_item.getContext().startActivity(intent);
-//            }
-//        });
+        holder.ll_favorite_song_item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.ll_favorite_song_item.getContext(), DetailActivity.class);
+                intent.putExtra("trackDetails", songsList.get(position));
+                holder.ll_favorite_song_item.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

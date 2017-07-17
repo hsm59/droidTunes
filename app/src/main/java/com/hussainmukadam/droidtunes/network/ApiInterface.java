@@ -1,6 +1,6 @@
 package com.hussainmukadam.droidtunes.network;
 
-import com.hussainmukadam.droidtunes.mainpage.model.SongResponse;
+import com.hussainmukadam.droidtunes.mainpage.models.SongResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

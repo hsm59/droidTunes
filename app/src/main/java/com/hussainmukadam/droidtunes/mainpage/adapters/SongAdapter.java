@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.mainpage.adapter;
+package com.hussainmukadam.droidtunes.mainpage.adapters;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.detailspage.view.DetailActivity;
-import com.hussainmukadam.droidtunes.mainpage.model.Song;
+import com.hussainmukadam.droidtunes.detailspage.ui.DetailActivity;
+import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
 

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".mainpage.view.MainActivity" >
+        <activity android:name=".mainpage.ui.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".detailspage.view.DetailActivity"
+        <activity android:name=".detailspage.ui.DetailActivity"
             android:screenOrientation="portrait"/>
     </application>
 

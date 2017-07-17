@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.detailspage.view;
+package com.hussainmukadam.droidtunes.detailspage.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.mainpage.model.Song;
+import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;

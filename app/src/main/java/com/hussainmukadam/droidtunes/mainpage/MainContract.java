@@ -2,7 +2,7 @@ package com.hussainmukadam.droidtunes.mainpage;
 
 import com.hussainmukadam.droidtunes.BasePresenter;
 import com.hussainmukadam.droidtunes.BaseView;
-import com.hussainmukadam.droidtunes.mainpage.model.Song;
+import com.hussainmukadam.droidtunes.mainpage.models.Song;
 
 import java.util.List;
 

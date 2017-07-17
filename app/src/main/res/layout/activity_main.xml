@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical"
-    tools:context="com.hussainmukadam.droidtunes.mainpage.ui.MainActivity">
+    tools:context="com.hussainmukadam.droidtunes.mainpage.view.MainActivity">
 
     <EditText
         android:id="@+id/et_search"

@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.mainpage.models;
+package com.hussainmukadam.droidtunes.mainpage.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

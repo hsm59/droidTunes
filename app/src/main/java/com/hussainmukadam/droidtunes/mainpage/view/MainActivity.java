@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.mainpage.ui;
+package com.hussainmukadam.droidtunes.mainpage.view;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +13,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.mainpage.adapters.SongAdapter;
-import com.hussainmukadam.droidtunes.mainpage.models.Song;
-import com.hussainmukadam.droidtunes.mainpage.models.SongResponse;
+import com.hussainmukadam.droidtunes.mainpage.adapter.SongAdapter;
+import com.hussainmukadam.droidtunes.mainpage.model.Song;
+import com.hussainmukadam.droidtunes.mainpage.model.SongResponse;
 import com.hussainmukadam.droidtunes.network.ApiClient;
 import com.hussainmukadam.droidtunes.network.ApiInterface;
 import com.hussainmukadam.droidtunes.utils.Util;

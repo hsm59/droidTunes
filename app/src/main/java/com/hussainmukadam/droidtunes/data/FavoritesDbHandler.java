@@ -19,7 +19,7 @@ public class FavoritesDbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_FAVORITE_TABLE = "CREATE TABLE" + FavoriteEntry.TABLE_NAME + " (" +
+        final String SQL_CREATE_FAVORITE_TABLE = "CREATE TABLE " + FavoriteEntry.TABLE_NAME + " (" +
                 FavoriteEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 FavoriteEntry.COLUMN_ARTIST_NAME+ " TEXT NOT NULL," +
                 FavoriteEntry.COLUMN_TRACK_NAME + " TEXT NOT NULL," +
@@ -32,7 +32,9 @@ public class FavoritesDbHandler extends SQLiteOpenHelper {
                 FavoriteEntry.COLUMN_TRACK_VIEW_URL + " TEXT NOT NULL," +
                 FavoriteEntry.COLUMN_COLLECTION_PRICE + " TEXT NOT NULL," +
                 FavoriteEntry.COLUMN_RELEASE_DATE + " TEXT NOT NULL," +
-                FavoriteEntry.COLUMN_PREVIEW_URL + " TEXT NOT NULL" + ");";
+                FavoriteEntry.COLUMN_PREVIEW_URL + " TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TRACK_ID +" TEXT NOT NULL," +
+                FavoriteEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" + ");";
 
         db.execSQL(SQL_CREATE_FAVORITE_TABLE);
     }

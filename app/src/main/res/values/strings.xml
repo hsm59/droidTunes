@@ -4,4 +4,5 @@
     <string name="itunes_url">https://itunes.apple.com/search?term=</string>
     <string name="str_track_album_art">TRACK</string>
     <string name="str_album_art">ALBUM</string>
+    <string name="action_favorite">Favorites</string>
 </resources>

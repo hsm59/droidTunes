@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.detailspage.ui.DetailActivity;
+import com.hussainmukadam.droidtunes.detailpage.ui.DetailActivity;
 import com.hussainmukadam.droidtunes.mainpage.models.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;

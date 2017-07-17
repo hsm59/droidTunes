@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.mainpage.models;
+package com.hussainmukadam.droidtunes.mainpage.model;
 
 import com.google.gson.annotations.SerializedName;
 

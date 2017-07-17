@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.favoritepage.ui;
+package com.hussainmukadam.droidtunes.favoritepage.view;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,8 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import com.hussainmukadam.droidtunes.R;
 import com.hussainmukadam.droidtunes.data.FavoritesContract;
 import com.hussainmukadam.droidtunes.data.FavoritesDbHandler;
-import com.hussainmukadam.droidtunes.favoritepage.adapters.FavoriteSongAdapter;
-import com.hussainmukadam.droidtunes.mainpage.models.Song;
+import com.hussainmukadam.droidtunes.favoritepage.adapter.FavoriteSongAdapter;
+import com.hussainmukadam.droidtunes.mainpage.model.Song;
 
 import java.util.ArrayList;
 import java.util.List;

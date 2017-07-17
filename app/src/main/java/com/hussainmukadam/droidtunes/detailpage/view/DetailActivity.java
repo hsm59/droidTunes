@@ -1,11 +1,10 @@
-package com.hussainmukadam.droidtunes.detailpage.ui;
+package com.hussainmukadam.droidtunes.detailpage.view;
 
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,11 +21,10 @@ import com.hussainmukadam.droidtunes.BuildConfig;
 import com.hussainmukadam.droidtunes.R;
 import com.hussainmukadam.droidtunes.data.FavoritesContract;
 import com.hussainmukadam.droidtunes.data.FavoritesDbHandler;
-import com.hussainmukadam.droidtunes.mainpage.models.Song;
+import com.hussainmukadam.droidtunes.mainpage.model.Song;
 import com.hussainmukadam.droidtunes.utils.MyBasePicassoTargetUtil;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

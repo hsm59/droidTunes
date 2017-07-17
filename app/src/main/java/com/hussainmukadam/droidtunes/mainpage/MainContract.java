@@ -2,7 +2,7 @@ package com.hussainmukadam.droidtunes.mainpage;
 
 import com.hussainmukadam.droidtunes.BasePresenter;
 import com.hussainmukadam.droidtunes.BaseView;
-import com.hussainmukadam.droidtunes.mainpage.models.Song;
+import com.hussainmukadam.droidtunes.mainpage.model.Song;
 
 import java.util.List;
 
@@ -27,9 +27,7 @@ public interface MainContract {
 
     interface Presenter extends BasePresenter{
 
-        void fetchSongsListFromServer();
-
-        void onSongSelected(int position);
+        void fetchSongsListFromServer(String songName);
 
     }
 }

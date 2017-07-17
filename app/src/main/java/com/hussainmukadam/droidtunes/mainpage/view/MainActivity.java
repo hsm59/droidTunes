@@ -1,4 +1,4 @@
-package com.hussainmukadam.droidtunes.mainpage.ui;
+package com.hussainmukadam.droidtunes.mainpage.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -17,15 +17,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.favoritepage.ui.FavoriteActivity;
-import com.hussainmukadam.droidtunes.mainpage.adapters.SongAdapter;
-import com.hussainmukadam.droidtunes.mainpage.models.Song;
-import com.hussainmukadam.droidtunes.mainpage.models.SongResponse;
+import com.hussainmukadam.droidtunes.favoritepage.view.FavoriteActivity;
+import com.hussainmukadam.droidtunes.mainpage.MainContract;
+import com.hussainmukadam.droidtunes.mainpage.adapter.SongAdapter;
+import com.hussainmukadam.droidtunes.mainpage.model.Song;
+import com.hussainmukadam.droidtunes.mainpage.model.SongResponse;
+import com.hussainmukadam.droidtunes.mainpage.presenter.MainPresenter;
 import com.hussainmukadam.droidtunes.network.ApiClient;
 import com.hussainmukadam.droidtunes.network.ApiInterface;
 import com.hussainmukadam.droidtunes.utils.Util;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,11 +36,14 @@ import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener {
+public class MainActivity extends AppCompatActivity implements MainContract.View, TextView.OnEditorActionListener {
     private static final String TAG = "MainActivity";
     ProgressDialog mProgressDialog;
     SongAdapter songAdapter;
     String mSongName;
+    private MainContract.Presenter mainPagePresenter;
+    private MainPresenter mMainPresenter;
+    private List<Song> mSongsList;
     @BindView(R.id.et_search) EditText et_search;
     @BindView(R.id.rv_songs) RecyclerView rv_songs;
 
@@ -47,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        mMainPresenter = new MainPresenter(this);
+        mSongsList = new ArrayList<>();
         setupProgressDialog();
         setupRecycler();
         et_search.setOnEditorActionListener(this);
@@ -137,5 +145,30 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 startActivity(favoriteIntent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setPresenter(MainContract.Presenter presenter) {
+        this.mainPagePresenter = presenter;
+    }
+
+    @Override
+    public void showSongsList(List<Song> songsList) {
+
+    }
+
+    @Override
+    public void showProgressBar() {
+
+    }
+
+    @Override
+    public void hideProgressBar() {
+
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+
     }
 }

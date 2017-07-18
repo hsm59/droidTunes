@@ -17,6 +17,12 @@ With the app, you can:
 * [Picasso](http://square.github.io/picasso/) - For Image Loading and Caching
 * [Retrofit](http://square.github.io/retrofit/) - For Network Calls
 
+## Architecture
+
+* Provides an example for a basic Model-View-Presenter (MVP) architecture without using any architectural frameworks. 
+* Act as a reference point for comparing and contrasting with other MVP architectural patterns.
+* [Android Architecture](https://github.com/hsm59/android-architecture) - [todo-mvp](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
+
 ## Screenshots
 
 <img width="45%" src="screenshots/Screen1.png" />

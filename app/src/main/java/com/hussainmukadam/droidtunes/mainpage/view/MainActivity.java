@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     private static final String TAG = "MainActivity";
     ProgressDialog mProgressDialog;
     SongAdapter songAdapter;
-    String mSongName;
+    String mArtistName;
     private MainContract.Presenter mainPagePresenter;
     private MainPresenter mMainPresenter;
     private List<Song> mSongsList;
@@ -68,52 +68,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             } else if (!Util.isConnected(this)) {
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             } else {
-                mSongName = et_search.getText().toString().trim().replace(" ", "+");
-                Log.d(TAG, "onEditorAction: mSongName " + mSongName);
-                mProgressDialog.show();
-                performSearch(mSongName);
+                mArtistName = et_search.getText().toString().trim().replace(" ", "+");
+                Log.d(TAG, "onEditorAction: mSongName " + mArtistName);
+                mMainPresenter.fetchSongsListFromServer(mArtistName);
             }
             return true;
         }
         return false;
-    }
-
-    private void performSearch(String artistName) {
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<SongResponse> call = apiService.getSongDetails(artistName);
-
-        call.enqueue(new Callback<SongResponse>() {
-            @Override
-            public void onResponse(Call<SongResponse> call, retrofit2.Response<SongResponse> response) {
-                Log.d(TAG, "onResponse: Response Code " + response.code());
-                if (response.isSuccessful()) {
-                    if (response.body().getResults().size() != 0) {
-                        Util.hideSoftInput(MainActivity.this);
-                        List<Song> mSongsListRetrofit = response.body().getResults();
-                        mProgressDialog.dismiss();
-                        songAdapter = new SongAdapter(mSongsListRetrofit);
-                        rv_songs.setAdapter(songAdapter);
-                        songAdapter.notifyDataSetChanged();
-                        Log.d(TAG, "onResponse: Songs List " + mSongsListRetrofit.size());
-                    } else {
-                        mProgressDialog.dismiss();
-                        Toast.makeText(MainActivity.this, "Could not find any songs..", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Util.hideSoftInput(MainActivity.this);
-                    mProgressDialog.dismiss();
-                    Toast.makeText(MainActivity.this, "Some error occurred, please try again", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SongResponse> call, Throwable t) {
-                mProgressDialog.dismiss();
-                Toast.makeText(MainActivity.this, "Some error occurred, please try again", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onFailure: Failure Occurred " + t.getMessage());
-            }
-        });
     }
 
 
@@ -154,21 +115,25 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void showSongsList(List<Song> songsList) {
-
+        Util.hideSoftInput(this);
+        songAdapter = new SongAdapter(songsList);
+        rv_songs.setAdapter(songAdapter);
+        songAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showProgressBar() {
-
+        mProgressDialog.show();
     }
 
     @Override
     public void hideProgressBar() {
-
+        mProgressDialog.dismiss();
     }
 
     @Override
     public void showError(String errorMessage) {
-
+        Util.hideSoftInput(this);
+        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
     }
 }

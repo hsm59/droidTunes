@@ -13,9 +13,10 @@ With the app, you can:
 
 ## Built with
 
-* [Butter Knife](http://jakewharton.github.io/butterknife/) - For Binding Views
-* [Picasso](http://square.github.io/picasso/) - For Image Loading and Caching
-* [Retrofit](http://square.github.io/retrofit/) - For Network Calls
+* [Butter Knife](http://jakewharton.github.io/butterknife/) - For binding views
+* [Picasso](http://square.github.io/picasso/) - For image loading and caching
+* [Retrofit](http://square.github.io/retrofit/) - For network calls
+* [LeakCanary](https://github.com/square/leakcanary) - For detecting memory leaks
 
 ## Architecture
 

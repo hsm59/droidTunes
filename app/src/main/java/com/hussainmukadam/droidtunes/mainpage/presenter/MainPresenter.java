@@ -1,16 +1,12 @@
 package com.hussainmukadam.droidtunes.mainpage.presenter;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.hussainmukadam.droidtunes.mainpage.MainContract;
-import com.hussainmukadam.droidtunes.mainpage.adapter.SongAdapter;
 import com.hussainmukadam.droidtunes.mainpage.model.Song;
 import com.hussainmukadam.droidtunes.mainpage.model.SongResponse;
-import com.hussainmukadam.droidtunes.mainpage.view.MainActivity;
 import com.hussainmukadam.droidtunes.network.ApiClient;
 import com.hussainmukadam.droidtunes.network.ApiInterface;
-import com.hussainmukadam.droidtunes.utils.Util;
 
 import java.util.ArrayList;
 import java.util.List;

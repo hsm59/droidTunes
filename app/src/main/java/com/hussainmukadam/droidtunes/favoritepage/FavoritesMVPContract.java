@@ -1,4 +1,6 @@
-package com.hussainmukadam.droidtunes.mainpage;
+package com.hussainmukadam.droidtunes.favoritepage;
+
+import android.database.sqlite.SQLiteDatabase;
 
 import com.hussainmukadam.droidtunes.BasePresenter;
 import com.hussainmukadam.droidtunes.BaseView;
@@ -7,27 +9,22 @@ import com.hussainmukadam.droidtunes.mainpage.model.Song;
 import java.util.List;
 
 /**
- * Created by hussain on 17/7/17.
+ * Created by hussain on 7/19/17.
  */
 
-public interface MainContract {
+public interface FavoritesMVPContract {
     interface View extends BaseView<Presenter>{
 
-        void showSongsList(List<Song> songsList);
+        void showProgress(boolean b);
 
-        void showProgressBar();
-
-        void hideProgressBar();
+        void displayList(List<Song> songsList);
 
         void showError(String errorMessage);
-
-
     }
-
 
     interface Presenter extends BasePresenter{
 
-        void fetchSongsListFromServer(String artistName);
+        void fetchDataFromDatabase(SQLiteDatabase mDb);
 
     }
 }

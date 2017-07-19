@@ -20,10 +20,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".detailpage.view.DetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".favoritepage.view.FavoriteActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".detailpage.view.DetailActivity" />
+        <activity android:name=".favoritepage.view.FavoriteActivity" />
     </application>
 
 </manifest>

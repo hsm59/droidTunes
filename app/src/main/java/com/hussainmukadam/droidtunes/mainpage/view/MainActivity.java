@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     String mArtistName;
     private MainContract.Presenter mainPagePresenter;
     private MainPresenter mMainPresenter;
-    private List<Song> mSongsList;
     @BindView(R.id.et_search) EditText et_search;
     @BindView(R.id.rv_songs) RecyclerView rv_songs;
 
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         ButterKnife.bind(this);
 
         mMainPresenter = new MainPresenter(this);
-        mSongsList = new ArrayList<>();
         setupProgressDialog();
         setupRecycler();
         et_search.setOnEditorActionListener(this);

@@ -41,25 +41,25 @@ public class Song implements Parcelable{
 
     public Song(){}
 
-    public Song(String artistName, String trackName, String artworkUrl30, String artworkUrl100,
-                String trackPrice, String trackTimeMillis, String collectionName, String collectionViewUrl,
-                String trackViewUrl, String collectionPrice, String releaseDate, String previewUrl,
-                String primaryGenreName, String trackId){
-        this.artistName = artistName;
-        this.trackName = trackName;
-        this.artworkUrl30 = artworkUrl30;
-        this.artworkUrl100 = artworkUrl100;
-        this.trackPrice = trackPrice;
-        this.trackTimeMillis = trackTimeMillis;
-        this.collectionName = collectionName;
-        this.collectionViewUrl = collectionViewUrl;
-        this.trackViewUrl = trackViewUrl;
-        this.collectionPrice = collectionPrice;
-        this.releaseDate = releaseDate;
-        this.previewUrl = previewUrl;
-        this.primaryGenreName = primaryGenreName;
-        this.trackId = trackId;
-    }
+//    public Song(String artistName, String trackName, String artworkUrl30, String artworkUrl100,
+//                String trackPrice, String trackTimeMillis, String collectionName, String collectionViewUrl,
+//                String trackViewUrl, String collectionPrice, String releaseDate, String previewUrl,
+//                String primaryGenreName, String trackId){
+//        this.artistName = artistName;
+//        this.trackName = trackName;
+//        this.artworkUrl30 = artworkUrl30;
+//        this.artworkUrl100 = artworkUrl100;
+//        this.trackPrice = trackPrice;
+//        this.trackTimeMillis = trackTimeMillis;
+//        this.collectionName = collectionName;
+//        this.collectionViewUrl = collectionViewUrl;
+//        this.trackViewUrl = trackViewUrl;
+//        this.collectionPrice = collectionPrice;
+//        this.releaseDate = releaseDate;
+//        this.previewUrl = previewUrl;
+//        this.primaryGenreName = primaryGenreName;
+//        this.trackId = trackId;
+//    }
 
     private Song(Parcel in){
         artistName = in.readString();

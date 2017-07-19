@@ -119,7 +119,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void addFavoriteSong(){
+    private void addFavoriteSong(){
         ContentValues cv = new ContentValues();
         cv.put(FavoritesContract.FavoriteEntry.COLUMN_ARTIST_NAME, song.getArtistName());
         cv.put(FavoritesContract.FavoriteEntry.COLUMN_ARTWORK_URL, song.getArtworkUrl100());
@@ -138,13 +138,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         Toast.makeText(this, "Added to your Favorites", Toast.LENGTH_SHORT).show();
     }
 
-    public void removeFavoriteSong() {
+    private void removeFavoriteSong() {
         mDb.delete(FavoritesContract.FavoriteEntry.TABLE_NAME, FavoritesContract.FavoriteEntry.COLUMN_TRACK_ID+ "="
                 + song.getTrackId(), null);
         Toast.makeText(this, "Removed from Favorites", Toast.LENGTH_SHORT).show();
     }
 
-    public boolean isSongFavorite(){
+    private boolean isSongFavorite(){
         FavoritesDbHandler favDbHandlerReadable = new FavoritesDbHandler(this);
         SQLiteDatabase mDbReadable = favDbHandlerReadable.getReadableDatabase();
 

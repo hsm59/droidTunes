@@ -31,6 +31,7 @@ ext{
     retrofitLibVersion = "2.3.0"
     loggingLibVersion = "3.6.0"
     butterknifeLibVer = "8.7.0"
+    leakCanaryVersion = "1.5.1"
 }
 
 dependencies {
@@ -59,4 +60,9 @@ dependencies {
     //Butterknife for Binding Views
     compile 'com.jakewharton:butterknife:'+butterknifeLibVer
     annotationProcessor 'com.jakewharton:butterknife-compiler:'+butterknifeLibVer
+
+    //LeakCanary for detecting memory leaks
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:'+leakCanaryVersion
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:'+leakCanaryVersion
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:'+leakCanaryVersion
 }

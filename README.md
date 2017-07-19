@@ -6,10 +6,10 @@ Fetches data from iTunes Search API
 
 With the app, you can:
 
-* Search for an Artist/Track
-* Get Details about the Track
-* Buy a Single Track/Entire Album from iTunes
-* Mark a Track as Favorite
+* Search for an artist/track
+* Get details about the track
+* Buy a single track/entire album from iTunes
+* Mark a track as favorite
 
 ## Built with
 
@@ -25,9 +25,10 @@ With the app, you can:
 
 ## Screenshots
 
-<img width="45%" src="screenshots/Screen1.png" />
-<img width="45%" src="screenshots/Screen2.png" />
-<img width="45%" src="screenshots/Screen3.png" />
+<div style="display:flex;" >
+<img style="margin-left:10px;" src="screenshots/Screen1.png" width="29%" >
+<img style="margin-left:10px;" src="screenshots/Screen2.png" width="29%" >
+<img style="margin-left:10px;" src="screenshots/Screen3.png" width="29%" >
 
 ## License
 

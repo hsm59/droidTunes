@@ -2,6 +2,7 @@ package com.hussainmukadam.droidtunes.mainpage.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,10 +22,7 @@ import com.hussainmukadam.droidtunes.favoritepage.view.FavoriteActivity;
 import com.hussainmukadam.droidtunes.mainpage.MainContract;
 import com.hussainmukadam.droidtunes.mainpage.adapter.SongAdapter;
 import com.hussainmukadam.droidtunes.mainpage.model.Song;
-import com.hussainmukadam.droidtunes.mainpage.model.SongResponse;
 import com.hussainmukadam.droidtunes.mainpage.presenter.MainPresenter;
-import com.hussainmukadam.droidtunes.network.ApiClient;
-import com.hussainmukadam.droidtunes.network.ApiInterface;
 import com.hussainmukadam.droidtunes.utils.Util;
 
 
@@ -33,14 +31,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View, TextView.OnEditorActionListener {
     private static final String TAG = "MainActivity";
     ProgressDialog mProgressDialog;
     SongAdapter songAdapter;
     String mArtistName;
+    LinearLayoutManager linearLayoutManager;
+    Parcelable stateList;
+    Bundle stateBundle;
+    private static final String RETAIN_STATE = "on_saved_instance_state";
     private MainContract.Presenter mainPagePresenter;
     private MainPresenter mMainPresenter;
     @BindView(R.id.et_search) EditText et_search;
@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mMainPresenter = new MainPresenter(this);
         setupProgressDialog();
         setupRecycler();
         et_search.setOnEditorActionListener(this);
+        mMainPresenter = new MainPresenter(this);
     }
 
     @Override
@@ -77,12 +77,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
 
     private void setupRecycler() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rv_songs.setLayoutManager(linearLayoutManager);
     }
 
-    //TODO: Move this method to Util, if there are any more network calls
+
     private void setupProgressDialog() {
         mProgressDialog = new ProgressDialog(MainActivity.this, R.style.ProgressBarTheme);
         mProgressDialog.setCancelable(false);
@@ -133,5 +133,44 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showError(String errorMessage) {
         Util.hideSoftInput(this);
         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Saving instance of the state in Parcelable stateList
+        stateList = rv_songs.getLayoutManager().onSaveInstanceState();
+        outState.putParcelable(RETAIN_STATE, stateList);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        stateBundle = new Bundle();
+        stateList = rv_songs.getLayoutManager().onSaveInstanceState();
+        stateBundle.putParcelable(RETAIN_STATE, stateList);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState!=null) {
+            et_search.onEditorAction(EditorInfo.IME_ACTION_SEARCH);
+            stateList = savedInstanceState.getParcelable(RETAIN_STATE);
+            rv_songs.getLayoutManager().onRestoreInstanceState(stateList);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if(stateBundle!=null){
+            stateList = stateBundle.getParcelable(RETAIN_STATE);
+            rv_songs.getLayoutManager().onRestoreInstanceState(stateList);
+        }
     }
 }

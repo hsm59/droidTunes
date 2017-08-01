@@ -1,32 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout android:id="@+id/host_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical">
-
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:drawableEnd="@drawable/ic_search_white_24dp"
-        android:hint="@string/search_artists"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="16dp"
-        android:paddingEnd="10dp"
-        android:paddingStart="16dp"
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorAccent"
-        android:textSize="16sp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_songs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-</LinearLayout>
+    xmlns:android="http://schemas.android.com/apk/res/android" />

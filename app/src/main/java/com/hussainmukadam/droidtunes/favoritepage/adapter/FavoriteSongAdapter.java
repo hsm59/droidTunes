@@ -1,6 +1,8 @@
 package com.hussainmukadam.droidtunes.favoritepage.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hussainmukadam.droidtunes.BuildConfig;
+import com.hussainmukadam.droidtunes.MainActivity;
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.detailpage.view.DetailActivity;
+
+import com.hussainmukadam.droidtunes.detailpage.view.DetailFragment;
 import com.hussainmukadam.droidtunes.mainpage.model.Song;
 import com.squareup.picasso.Picasso;
 
@@ -50,9 +54,14 @@ public class FavoriteSongAdapter extends RecyclerView.Adapter<FavoriteSongAdapte
         holder.ll_favorite_song_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.ll_favorite_song_item.getContext(), DetailActivity.class);
-                intent.putExtra("trackDetails", songsList.get(position));
-                holder.ll_favorite_song_item.getContext().startActivity(intent);
+//                Intent intent = new Intent(holder.ll_favorite_song_item.getContext(), DetailActivity.class);
+//                intent.putExtra("trackDetails", songsList.get(position));
+//                holder.ll_favorite_song_item.getContext().startActivity(intent);
+                Fragment detailFragment = new DetailFragment();
+                Bundle args = new Bundle();
+                args.putParcelable("trackDetails", songsList.get(position));
+                MainActivity activity = (MainActivity) holder.ll_favorite_song_item.getContext();
+                activity.switchContent(detailFragment, args, detailFragment.getTag());
             }
         });
     }

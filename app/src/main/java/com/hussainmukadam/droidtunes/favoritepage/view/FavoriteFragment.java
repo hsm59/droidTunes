@@ -1,15 +1,16 @@
 package com.hussainmukadam.droidtunes.favoritepage.view;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.data.FavoritesContract;
 import com.hussainmukadam.droidtunes.data.FavoritesDbHandler;
 import com.hussainmukadam.droidtunes.favoritepage.FavoritesMVPContract;
 import com.hussainmukadam.droidtunes.favoritepage.adapter.FavoriteSongAdapter;
@@ -23,10 +24,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by hussain on 7/15/17.
+ * Created by hussain on 8/2/17.
  */
 
-public class FavoriteActivity extends AppCompatActivity implements FavoritesMVPContract.View{
+public class FavoriteFragment extends Fragment implements FavoritesMVPContract.View{
     @BindView(R.id.rv_favorite_songs)
     RecyclerView mRvFavoriteSongs;
     FavoriteSongAdapter favoriteSongAdapter;
@@ -35,19 +36,22 @@ public class FavoriteActivity extends AppCompatActivity implements FavoritesMVPC
     FavoritePresenter presenter;
     List<Song> mFavoriteSongsList;
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Favorites");
-        setContentView(R.layout.activity_favorite);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        //TODO: Add a toolbar and set the title as Favorites
+        ButterKnife.bind(this, view);
+
         mFavoriteSongsList = new ArrayList<>();
         presenter = new FavoritePresenter(this);
 
-        FavoritesDbHandler favDbHelper = new FavoritesDbHandler(this);
+        FavoritesDbHandler favDbHelper = new FavoritesDbHandler(getContext());
         mDb = favDbHelper.getReadableDatabase();
 
         presenter.fetchDataFromDatabase(mDb);
+
+        return view;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class FavoriteActivity extends AppCompatActivity implements FavoritesMVPC
 
     @Override
     public void displayList(List<Song> songsList) {
-        mRvFavoriteSongs.setLayoutManager(new GridLayoutManager(this, 3));
+        mRvFavoriteSongs.setLayoutManager(new GridLayoutManager(getContext(), 3));
         favoriteSongAdapter = new FavoriteSongAdapter(songsList);
         mRvFavoriteSongs.setAdapter(favoriteSongAdapter);
         favoriteSongAdapter.notifyDataSetChanged();

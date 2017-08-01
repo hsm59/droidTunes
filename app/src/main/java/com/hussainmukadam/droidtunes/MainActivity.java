@@ -1,12 +1,14 @@
 package com.hussainmukadam.droidtunes;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.hussainmukadam.droidtunes.favoritepage.view.FavoriteActivity;
+
+import com.hussainmukadam.droidtunes.favoritepage.view.FavoriteFragment;
 import com.hussainmukadam.droidtunes.mainpage.view.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,9 +36,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_favorite:
-                Intent favoriteIntent = new Intent(this, FavoriteActivity.class);
-                startActivity(favoriteIntent);
+                switchContent(new FavoriteFragment(), null, new FavoriteFragment().getTag());
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void switchContent(Fragment fragment, Bundle args, String tag) {
+
+        fragment.setArguments(args);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.host_container, fragment).addToBackStack(tag).commit();
     }
 }

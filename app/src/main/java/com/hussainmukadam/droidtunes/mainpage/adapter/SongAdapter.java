@@ -1,6 +1,8 @@
 package com.hussainmukadam.droidtunes.mainpage.adapter;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.hussainmukadam.droidtunes.MainActivity;
 import com.hussainmukadam.droidtunes.R;
-import com.hussainmukadam.droidtunes.detailpage.view.DetailActivity;
+
+import com.hussainmukadam.droidtunes.detailpage.view.DetailFragment;
 import com.hussainmukadam.droidtunes.mainpage.model.Song;
 import com.hussainmukadam.droidtunes.utils.Util;
 import com.squareup.picasso.Picasso;
@@ -48,9 +52,14 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.rl_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(holder.rl_layout.getContext(), DetailActivity.class);
-                intent.putExtra("trackDetails", songsList.get(position));
-                holder.rl_layout.getContext().startActivity(intent);
+//                Intent intent = new Intent(holder.rl_layout.getContext(), DetailActivity.class);
+//                intent.putExtra("trackDetails", songsList.get(position));
+//                holder.rl_layout.getContext().startActivity(intent);
+                Fragment detailFragment = new DetailFragment();
+                Bundle args = new Bundle();
+                args.putParcelable("trackDetails", songsList.get(position));
+                MainActivity activity = (MainActivity) holder.rl_layout.getContext();
+                activity.switchContent(detailFragment, args, detailFragment.getTag());
             }
         });
     }

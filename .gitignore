@@ -7,3 +7,8 @@
 /build
 /captures
 .externalNativeBuild
+libs/
+src/androidTest/
+src/main/assets/
+src/main/java/com/hussainmukadam/droidtunes/app/
+src/test/

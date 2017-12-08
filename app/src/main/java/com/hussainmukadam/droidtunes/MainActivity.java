@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(args);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.host_container, fragment).addToBackStack(tag).commit();
+                .add(R.id.host_container, fragment)
+                .addToBackStack(tag).commit();
     }
 }

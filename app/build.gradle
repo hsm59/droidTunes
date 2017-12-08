@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.hussainmukadam.droidtunes"
         minSdkVersion 18
@@ -26,11 +26,11 @@ android {
 }
 
 ext{
-    supportLibVersion = "25.3.1"
+    supportLibVersion = "25.4.0"
     picassoLibVersion = "2.5.2"
     retrofitLibVersion = "2.3.0"
     loggingLibVersion = "3.6.0"
-    butterknifeLibVer = "8.7.0"
+    butterknifeLibVer = "8.8.1"
     leakCanaryVersion = "1.5.1"
 }
 
@@ -39,30 +39,30 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:design:${supportLibVersion}"
-    compile 'com.android.support:cardview-v7:'+supportLibVersion
-    compile "com.android.support:support-v4:${supportLibVersion}"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
 
     //Picasso for Image Processing
-    compile "com.squareup.picasso:picasso:${picassoLibVersion}"
+    implementation "com.squareup.picasso:picasso:${picassoLibVersion}"
     //Palette for Extracting Colors
-    compile "com.android.support:palette-v7:${supportLibVersion}"
+    implementation "com.android.support:palette-v7:${supportLibVersion}"
 
     //Retrofit and OkHttp for Networking
-    compile 'com.squareup.retrofit2:retrofit:'+retrofitLibVersion
-    compile 'com.squareup.retrofit2:converter-gson:'+retrofitLibVersion
+    implementation "com.squareup.retrofit2:retrofit:${retrofitLibVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitLibVersion}"
     //Logging Network Calls
-    compile 'com.squareup.okhttp3:logging-interceptor:'+loggingLibVersion
+    implementation "com.squareup.okhttp3:logging-interceptor:${loggingLibVersion}"
 
     //Butterknife for Binding Views
-    compile 'com.jakewharton:butterknife:'+butterknifeLibVer
-    annotationProcessor 'com.jakewharton:butterknife-compiler:'+butterknifeLibVer
+    implementation "com.jakewharton:butterknife:${butterknifeLibVer}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeLibVer}"
 
     //LeakCanary for detecting memory leaks
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:'+leakCanaryVersion
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:'+leakCanaryVersion
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:'+leakCanaryVersion
+    debugCompile "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
 }

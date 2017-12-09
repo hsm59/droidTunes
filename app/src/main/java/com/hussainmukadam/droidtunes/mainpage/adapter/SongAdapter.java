@@ -30,9 +30,15 @@ import butterknife.ButterKnife;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private List<Song> songsList;
+    private OnItemClickListener onItemClickListener;
 
-    public SongAdapter(List<Song> songsList){
+    public interface OnItemClickListener{
+        void onSongItemClicked(Song song, int position);
+    }
+
+    public SongAdapter(List<Song> songsList, OnItemClickListener onItemClickListener){
         this.songsList = songsList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
@@ -52,14 +58,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.rl_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(holder.rl_layout.getContext(), DetailActivity.class);
-//                intent.putExtra("trackDetails", songsList.get(position));
-//                holder.rl_layout.getContext().startActivity(intent);
-                Fragment detailFragment = new DetailFragment();
-                Bundle args = new Bundle();
-                args.putParcelable("trackDetails", songsList.get(position));
-                MainActivity activity = (MainActivity) holder.rl_layout.getContext();
-                activity.switchContent(detailFragment, args, detailFragment.getTag());
+                onItemClickListener.onSongItemClicked(songsList.get(position), position);
             }
         });
     }

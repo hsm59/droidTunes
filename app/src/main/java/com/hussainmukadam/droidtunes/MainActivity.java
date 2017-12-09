@@ -8,21 +8,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.hussainmukadam.droidtunes.detailpage.view.DetailFragment;
 import com.hussainmukadam.droidtunes.favoritepage.view.FavoriteFragment;
+import com.hussainmukadam.droidtunes.mainpage.model.Song;
 import com.hussainmukadam.droidtunes.mainpage.view.MainFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnItemClickListenerMain {
     private static final String TAG = "MainActivity";
+    boolean isTwoPane;
+    OnDetailsPaneChangeListener onDetailsPaneChangeListener;
 
+    public interface OnDetailsPaneChangeListener{
+        void onDetailFragmentChange(Song song, int position);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.host_container, new MainFragment())
-                .commit();
+        isTwoPane = getResources().getBoolean(R.bool.isTablet);
+
+        if (isTwoPane) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.host_container, new MasterDetailsFragment())
+                    .commit();
+        } else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.host_container, new MainFragment())
+                    .commit();
+        }
     }
 
 
@@ -34,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_favorite:
                 switchContent(new FavoriteFragment(), null, new FavoriteFragment().getTag());
         }
@@ -48,5 +63,21 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.host_container, fragment)
                 .addToBackStack(tag).commit();
+    }
+
+    public void setOnDetailsPaneChangeListener(OnDetailsPaneChangeListener onDetailsPaneChangeListener){
+        this.onDetailsPaneChangeListener = onDetailsPaneChangeListener;
+    }
+
+    @Override
+    public void onItemClickMainFragment(Song song, int position) {
+        if (isTwoPane) {
+            onDetailsPaneChangeListener.onDetailFragmentChange(song, position);
+        } else {
+            Fragment detailFragment = new DetailFragment();
+            Bundle args = new Bundle();
+            args.putParcelable("trackDetails", song);
+            switchContent(detailFragment, args, detailFragment.getTag());
+        }
     }
 }

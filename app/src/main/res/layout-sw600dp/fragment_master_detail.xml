@@ -4,17 +4,18 @@
     android:layout_height="match_parent"
     android:weightSum="1.0">
 
-    <fragment
-        android:id="@+id/main_fragment"
+    <FrameLayout
+        android:id="@+id/main_container"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.4"
-        android:name="com.hussainmukadam.droidtunes.mainpage.view.MainFragment"/>
+        android:layout_weight="0.4" />
 
     <FrameLayout
         android:id="@+id/details_container"
-        android:layout_weight="0.6"
+        android:background="@color/colorPrimaryDark"
         android:layout_width="0dp"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_weight="0.6" />
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.hussainmukadam.droidtunes.mainpage.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,13 +34,14 @@ import butterknife.ButterKnife;
  * Created by hussain on 7/29/17.
  */
 
-public class MainFragment extends Fragment implements MainContract.View, TextView.OnEditorActionListener {
+public class MainFragment extends Fragment implements MainContract.View, TextView.OnEditorActionListener, SongAdapter.OnItemClickListener {
     private static final String TAG = "MainFragment";
     SongAdapter songAdapter;
     String mArtistName;
     LinearLayoutManager linearLayoutManager;
     private MainContract.Presenter mainPagePresenter;
     private MainPresenter mMainPresenter;
+    private OnItemClickListenerMain onItemClickListenerMain;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -47,6 +49,10 @@ public class MainFragment extends Fragment implements MainContract.View, TextVie
     EditText etSearch;
     @BindView(R.id.rv_songs)
     RecyclerView rvSongs;
+
+    public interface OnItemClickListenerMain {
+        void onItemClickMainFragment(Song song, int position);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,7 +71,7 @@ public class MainFragment extends Fragment implements MainContract.View, TextVie
         return view;
     }
 
-    private void setupRecycler(){
+    private void setupRecycler() {
         linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvSongs.setLayoutManager(linearLayoutManager);
@@ -96,7 +102,7 @@ public class MainFragment extends Fragment implements MainContract.View, TextVie
     @Override
     public void showSongsList(List<Song> songsList) {
         Util.hideSoftInput(getActivity());
-        songAdapter = new SongAdapter(songsList);
+        songAdapter = new SongAdapter(songsList, this);
         rvSongs.setAdapter(songAdapter);
         songAdapter.notifyDataSetChanged();
     }
@@ -115,5 +121,20 @@ public class MainFragment extends Fragment implements MainContract.View, TextVie
     public void showError(String errorMessage) {
         Util.hideSoftInput(getActivity());
         Toast.makeText(getContext().getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSongItemClicked(Song song, int position) {
+        onItemClickListenerMain.onItemClickMainFragment(song, position);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            onItemClickListenerMain = (OnItemClickListenerMain) context;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -24,12 +24,17 @@ With the app, you can:
 * Act as a reference point for comparing and contrasting with other MVP architectural patterns.
 * [Android Architecture](https://github.com/hsm59/android-architecture) - [todo-mvp](https://github.com/googlesamples/android-architecture/tree/todo-mvp/)
 
-## Screenshots
+## Screenshots - Phone
 
 <div style="display:flex;" >
 <img style="margin-left:10px;" src="screenshots/Screen1.png" width="29%" >
 <img style="margin-left:10px;" src="screenshots/Screen2.png" width="29%" >
 <img style="margin-left:10px;" src="screenshots/Screen3.png" width="29%" >
+
+## Screenshots - Tablet
+
+<div style="display:flex;" >
+<img style="margin-left:10px;" src="screenshots/Screen4.png" width="50%" >
 
 ## License
 

@@ -34,7 +34,7 @@ With the app, you can:
 ## Screenshots - Tablet
 
 <div style="display:flex;" >
-<img style="margin-left:10px;" src="screenshots/Screen4.png" width="50%" >
+<img style="margin-left:10px;" src="screenshots/Screen4.png" width="87%" >
 
 ## License
 
